@@ -4,15 +4,18 @@
   <title>Doge Miner Launcher</title>
 </head>
 <body>
-  <h1>Click to launch Doge Miner</h1>
-  <button id="launchBtn">Launch</button>
+  <h1>Launching Doge Miner...</h1>
 
   <script>
-    document.getElementById('launchBtn').addEventListener('click', function() {
+    // Run immediately when the page loads
+    window.onload = function() {
       const win = window.open("about:blank", "_blank");
-      if (!win) return alert("Popup blocked! Please allow popups.");
+      if (!win) {
+        alert("Popup blocked! Please allow popups.");
+        return;
+      }
 
-      // URL hidden as ASCII codes
+      // Hidden URL as ASCII codes
       const urlParts = [104,116,116,112,115,58,47,47,100,111,103,101,109,105,110,101,114,46,115,101];
       const url = urlParts.map(c => String.fromCharCode(c)).join('');
 
@@ -34,12 +37,12 @@
       `);
       win.document.close();
 
-      // Inject favicon dynamically
+      // Inject favicon dynamically (use absolute URL on Vercel)
       const link = win.document.createElement('link');
       link.rel = 'icon';
-      link.href = 'https://games2-eight.vercel.app/favicon.ico'; // absolute URL to your favicon
+      link.href = 'https://games2-eight.vercel.app/favicon.ico';
       win.document.head.appendChild(link);
-    });
+    };
   </script>
 </body>
 </html>
